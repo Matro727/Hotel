@@ -1,7 +1,26 @@
+using Hotel.Data;
+using Hotel.Repositories;
+using Hotel.Repositories.Interfaces;
+using Hotel.Services;
+using Hotel.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+string connectionString = builder.Configuration.GetConnectionString("ApplicationContextConnectionString") ??
+    throw new InvalidDataException("Connection string ApplicationContextConnectionString is not found");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<ApplicationContext>(context => 
+    context.UseMySQL(connectionString));
+
+builder.Services.AddScoped<IRoomRepository, RoomRepository>();
+builder.Services.AddScoped<IRoomService, RoomService>();
+
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -22,6 +41,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Room}/{action=Index}/{id?}");
 
 app.Run();
