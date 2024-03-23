@@ -3,29 +3,35 @@
 *@
 @{
 }
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+    <h2>Create Product</h2>
 
-<h2>Create Product</h2>
+    <form method="post" asp-controller="Room" asp-action="Create">
+        <p>
+            <label>Number</label>
+            <input type="number" name="number" />
+        </p>
 
-<form method="post" asp-controller="Room" asp-action="Create">
-    <p>
-        <label>Number</label>
-        <input type="number" name="number" />
-    </p>
+        <p>
+            <label>Type</label>
+            <input type="text" name="type" />
+        </p>
 
-    <p>
-        <label>Type</label>
-        <input type="text" name="type" />
-    </p>
+        <p>
+            <label>Rentability</label>
+            <input type="text" name="rentability" />
+        </p>
 
-    <p>
-        <label>Rentability</label>
-        <input type="text" name="rentability" />
-    </p>
+        <p>
+            <label>Price</label>
+            <input type="number" name="price" />
+        </p>
 
-    <p>
-        <label>Price</label>
-        <input type="number" name="price" />
-    </p>
-
-    <button type="submit">Create</button>
-</form>
+        <button type="submit">Create</button>
+    </form>
+}
+else
+{
+        <h2 class="text-danger">You can't access this page if you aren't logged in</h2>
+}

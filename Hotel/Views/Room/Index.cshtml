@@ -7,47 +7,53 @@
 }
 
 @model IEnumerable<RoomViewModel>
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+    <h2>Rooms</h2>
 
-<h2>Rooms</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Type</th>
+                <th>Rentability</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Number</th>
-            <th>Type</th>
-            <th>Rentability</th>
-            <th>Price</th>
-            <th>Actions</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      @foreach (var room in Model)
-      {
-        <tr>
-            <th>@room.Number</th>
-            <th>@room.Type</th>
-            <th>@room.Rentability</th>
-            <th>@room.Price</th>
-            <th>
-                <button>
-                        <a 
+        <tbody>
+            @foreach (var room in Model)
+            {
+                <tr>
+                    <th>@room.Number</th>
+                    <th>@room.Type</th>
+                    <th>@room.Rentability</th>
+                    <th>@room.Price</th>
+                    <th>
+                        <button>
+                            <a 
                             asp-controller="Room" 
                             asp-action="Edit" 
                             asp-route-id="@room.Id">
-                            Edit
-                        </a>
-                </button>
-                <button>
-                        <a 
+                                Edit
+                            </a>
+                        </button>
+                        <button>
+                            <a 
                             asp-controller="Room" 
                             asp-action="Delete" 
                             asp-route-id="@room.Id">
-                            Delete
-                        </a>
-                </button>
-            </th>
-        </tr>
-      }
-    </tbody>
-</table>
+                                Delete
+                            </a>
+                        </button>
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h2 class="text-danger">You can't access this page if you aren't logged in</h2>
+}

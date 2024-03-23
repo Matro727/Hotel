@@ -4,6 +4,8 @@ using Hotel.Repositories.Interfaces;
 using Hotel.Services;
 using Hotel.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Hotel.Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,16 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationContext>(context => 
     context.UseMySQL(connectionString));
+
+builder.Services.AddDefaultIdentity<User>(options =>
+    {
+        options.Password.RequireDigit = true;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = true;
+        options.Password.RequiredUniqueChars = 1;
+        options.Password.RequiredLength = 4;
+    })
+    .AddEntityFrameworkStores<ApplicationContext>();
 
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<IRoomService, RoomService>();
@@ -36,11 +48,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Room}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();
