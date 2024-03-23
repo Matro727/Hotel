@@ -10,18 +10,18 @@ namespace Hotel.Tests.Entities
         [Test]
         public void Room_Constructors_SetsPropertiesCorrectly()
         {
-            // Arrange
+            
             int id = 1;
             int number = 101;
             string type = "Single";
             string rentability = "Rentable";
             int price = 50;
 
-            // Act
+            
             var room1 = new Room(number, type, rentability, price);
             var room2 = new Room(id, number, type, rentability, price);
 
-            // Assert
+            
             Assert.AreEqual(id, room2.Id);
             Assert.AreEqual(number, room1.Number);
             Assert.AreEqual(type, room1.Type);
@@ -32,52 +32,52 @@ namespace Hotel.Tests.Entities
         [Test]
         public void Room_Number_Property_IsRequired()
         {
-            // Arrange
+            
             var room = new Room();
 
-            // Act
+            
             var validationResult = ValidateModel(room);
 
-            // Assert
+            
             Assert.IsFalse(validationResult);
         }
 
         [Test]
         public void Room_Type_Property_IsRequired()
         {
-            // Arrange
+            
             var room = new Room();
 
-            // Act
+            
             var validationResult = ValidateModel(room);
 
-            // Assert
+            
             Assert.IsFalse(validationResult);
         }
 
         [Test]
         public void Room_Rentability_Property_IsRequired()
         {
-            // Arrange
+            
             var room = new Room();
 
-            // Act
+            
             var validationResult = ValidateModel(room);
 
-            // Assert
+            
             Assert.IsFalse(validationResult);
         }
 
         [Test]
         public void Room_Price_Property_IsRequired()
         {
-            // Arrange
+            
             var room = new Room();
 
-            // Act
+            
             var validationResult = ValidateModel(room);
 
-            // Assert
+            
             Assert.IsFalse(validationResult);
         }
 
