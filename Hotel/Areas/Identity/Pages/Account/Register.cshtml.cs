@@ -9,6 +9,7 @@ using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
 using Hotel.Data.Entities;
+using Hotel.Data.Enums;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -79,10 +80,24 @@ namespace Hotel.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    try
+                    {
+                        await _userManager.AddToRoleAsync(user, UserRoles.User.ToString());
+                    }
+                    catch(Exception)
+                    {
+                       await _userManager.DeleteAsync(user);
+
+                        ModelState.AddModelError(string.Empty, "Registration error");
+
+                        return Page();
+                    }
+
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
                     return LocalRedirect(returnUrl);
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);

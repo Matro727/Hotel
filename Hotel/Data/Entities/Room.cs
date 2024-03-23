@@ -21,6 +21,7 @@ namespace Hotel.Data.Entities
 
         public Room() 
         { }
+
         public Room(int number, string type, string rentability, int price)
         {
             Number = number;
