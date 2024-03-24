@@ -1,0 +1,60 @@
+﻿@using Hotel.Models.ParkingSlot
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Parking Slot";
+}
+
+@model IEnumerable<ParkingSlotViewModel>
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+            <h2>Parking Slots</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Type</th>
+                    <th>Rentability</th>
+                    <th>PricePerDay</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            @foreach (var parkingSlot in Model)
+            {
+                        <tr>
+                                    <th>@parkingSlot.Number</th>
+                                    <th>@parkingSlot.Type</th>
+                                    <th>@parkingSlot.Rentability</th>
+                                    <th>@parkingSlot.PricePerDay</th>
+                            <th>
+                                <button>
+                                    <a 
+                                    asp-controller="ParkingSlot" 
+                                    asp-action="Edit" 
+                                            asp-route-id="@parkingSlot.Id">
+                                        Edit
+                                    </a>
+                                </button>
+                                <button>
+                                    <a 
+                                            asp-controller="ParkingSlot" 
+                                    asp-action="Delete" 
+                                            asp-route-id="@parkingSlot.Id">
+                                        Delete
+                                    </a>
+                                </button>
+                            </th>
+                        </tr>
+            }
+            </tbody>
+        </table>
+}
+else
+{
+        <h2 class="text-danger">You can't access this page if you aren't logged in</h2>
+}
+
