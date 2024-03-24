@@ -11,6 +11,7 @@
         public string Rentability { get; set; }
 
         public int PricePerDay { get; set; }
+        public bool IsOccupied { get; set; }
 
         public ParkingSlotViewModel(int id, int number, string type, string rentability, int pricePerDay)
         {
