@@ -8,18 +8,18 @@ namespace Hotel.Controllers
 {
     public class ReviewController : Controller
     {
-        private readonly IReviewService ReviewService;
+        private readonly IReviewService reviewService;
 
-        public ReviewController(IReviewService ReviewService)
+        public ReviewController(IReviewService reviewService)
         {
-            this.ReviewService = ReviewService;
+            this.reviewService = reviewService;
         }
 
         public IActionResult Index()
         {
-            var Reviews = ReviewService.GetAll();
+            var reviews = reviewService.GetAll();
 
-            return View(Reviews);
+            return View(reviews);
         }
 
         public IActionResult Create()
@@ -28,32 +28,32 @@ namespace Hotel.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CreateReviewViewModel Review)
+        public IActionResult Create(CreateReviewViewModel review)
         {
-            ReviewService.Add(Review);
+            reviewService.Add(review);
 
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Delete(int id)
         {
-            ReviewService.Delete(id);
+            reviewService.Delete(id);
 
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Edit(int id)
         {
-            var Review = ReviewService.Get(id);
+            var review = reviewService.Get(id);
 
-            return View(Review);
+            return View(review);
         }
 
         [HttpPost]
 
-        public IActionResult Edit(EditReviewViewModel Review)
+        public IActionResult Edit(EditReviewViewModel review)
         {
-            ReviewService.Edit(Review);
+            reviewService.Edit(review);
 
             return RedirectToAction(nameof(Index));
         }
