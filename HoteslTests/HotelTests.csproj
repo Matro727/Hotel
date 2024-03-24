@@ -10,15 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\Shared\**" />
-    <Compile Remove="Views\User\**" />
-    <EmbeddedResource Remove="Views\Shared\**" />
-    <EmbeddedResource Remove="Views\User\**" />
-    <None Remove="Views\Shared\**" />
-    <None Remove="Views\User\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AngleSharp" Version="1.1.2" />
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.3" />
@@ -36,10 +27,6 @@
 
   <ItemGroup>
     <Using Include="NUnit.Framework" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Home\" />
   </ItemGroup>
 
 </Project>
