@@ -31,14 +31,23 @@
                         <li class="nav-item">
                            <a class="nav-link text-dark" asp-area="" asp-controller="ParkingSlot" asp-action="Index">ParkingSlot</a>
                         </li>
+                            <li class="nav-item">
+                               <a class="nav-link text-dark" asp-area="" asp-controller="Taxi" asp-action="Index">Taxi</a>
+                            </li>
                             @if (User.IsInRole(UserRoles.Admin.ToString()) || User.IsInRole(UserRoles.Staff.ToString()))
                             {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Room" asp-action="Create">Create Room</a>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Room" asp-action="Create">Create Room</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="ParkingSlot" asp-action="Create">Create ParkingSlot</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ParkingSlot" asp-action="Create">Create ParkingSlot</a>
-                        </li>
+                            }
+                            @if (User.IsInRole(UserRoles.Admin.ToString()) || User.IsInRole(UserRoles.Taximan.ToString()))
+                            {
+                                        <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Taxi" asp-action="Create">Create Taxi</a>
+                                </li>
                             }
                             @if (User.IsInRole(UserRoles.Admin.ToString()))
                             {

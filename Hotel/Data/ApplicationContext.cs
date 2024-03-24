@@ -10,6 +10,8 @@ namespace Hotel.Data
 
         public DbSet<ParkingSlot> ParkingSlots { get; set; }
 
+        public DbSet<Taxi> Taxis { get; set; }
+
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
 
     }

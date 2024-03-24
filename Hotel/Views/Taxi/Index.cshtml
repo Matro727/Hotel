@@ -1,0 +1,60 @@
+﻿@using Hotel.Models.Taxi
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Taxi";
+}
+
+@model IEnumerable<TaxiViewModel>
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+                    <h2>Taxi</h2>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Number</th>
+                        <th>Type</th>
+                        <th>Rentability</th>
+                        <th>PricePerMinute</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+            @foreach (var taxi in Model)
+            {
+                                <tr>
+                                                    <th>@taxi.Number</th>
+                                                    <th>@taxi.Type</th>
+                                                    <th>@taxi.Rentability</th>
+                                                    <th>@taxi.PricePerMinute</th>
+                                    <th>
+                                        <button>
+                                            <a 
+                                            asp-controller="Taxi" 
+                                            asp-action="Edit" 
+                                            asp-route-id="@taxi.Id">
+                                                Edit
+                                            </a>
+                                        </button>
+                                        <button>
+                                            <a 
+                                                            asp-controller="Taxi" 
+                                            asp-action="Delete" 
+                                                            asp-route-id="@taxi.Id">
+                                                Delete
+                                            </a>
+                                        </button>
+                                    </th>
+                                </tr>
+            }
+                </tbody>
+            </table>
+}
+else
+{
+            <h2 class="text-danger">You can't access this page if you aren't logged in</h2>
+}
+
