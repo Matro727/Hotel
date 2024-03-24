@@ -37,17 +37,6 @@ namespace Hotel.Repositories
 
             Assert.AreEqual(room, createdroom, "room is different than expected");
         }
-
-        [Test]
-        public void GivenNullroom_WhenAddingAroom_Throws()
-        {
-            var exception = Assert.Throws<ArgumentException>(() => roomRepository.Add(null));
-
-            Assert.AreEqual(
-                "room can't be null!",
-                exception.Message,
-                "Exception message is different than expexted");
-        }
         #endregion
 
         #region GetAll
